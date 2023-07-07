@@ -1,3 +1,5 @@
+## Actualizar la version de compilacion
+
 uno de los errores mas comunes en el gradle es la version de compilacion
 
     Warning: The plugin device_info_plus requires Android SDK version 33.
@@ -6,7 +8,7 @@ para esto tienes que buscar cual es la version necesaria para tu proyecto, que c
 
 > **_android/app/build.gradle_**
 
-en este caso tengo esta version antigua
+en este caso tengo esta version antigua en el **_compileSdkVersion_** y en el **_targetSdkVersion_**
 
 ```gradle
 android {
@@ -22,7 +24,7 @@ android {
 }
 ```
 
-pero la que ocupo es la versin 33, entonces lo cambiare a la siguiente manera
+pero la que ocupo es la version 33, entonces lo cambiare a la siguiente manera
 
 ```gradle
 android {
@@ -39,3 +41,64 @@ android {
 ```
 
 ---
+
+## Actualizar version del gradle en el proyecto
+
+Otro error puede ser el siguiente
+
+```
+* Where:
+Build file 'C:\Users\Carlos Rodriguez\AppData\Local\Pub\Cache\hosted\pub.dev\device_info_plus-9.0.2\android\build.gradle' line: 30
+
+* What went wrong:
+A problem occurred evaluating project ':device_info_plus'.
+> Could not find method namespace() for arguments [dev.fluttercommunity.plus.device_info] on extension 'android' of type com.android.build.gradle.LibraryExtension.
+```
+
+Este error se da debido a la incompatibilidad entre las dependencias ya cargadas en el proyecto, pues las dependencias tienen una version mas actualizada del gradle dentro de ellas pero el gradle tiene una version mas antigua que con la que son compatibles.
+
+Para solucionar esto tienes que actualizar el gradle del proyecto, dentro de tu proyecto vas a la direccion
+
+> **_android/build.gradle_**
+
+y actualizas la version del gradle en las lineas
+
+```gradle
+buildscript {
+  ... ...
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+        ... ...
+    }
+}
+```
+
+a la nueva version de la siguiente manera
+
+```gradle
+buildscript {
+  ... ...
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        ... ...
+    }
+}
+```
+
+---
+
+## Actualizar version de gradle en las dependencias
+
+Despues del error anterior es posible que te de un error similar al siguiente cuando intentes ejecutar tu aplicacion
+
+```
+* What went wrong:
+The Android Gradle plugin supports only Kotlin Gradle plugin version 1.5.20 and higher.
+The following dependencies do not satisfy the required version:
+project ':hexcolor' -> org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.50
+```
+
+este error es muy similar al anterior, su motivo es que ahora la version del gradle es demasiado actual para la version del gradle de las dependencias, para este la mejor opcion es actualizar cada dependencia que genera conflicto para que tenga mayor compatibilidad y funcione con la version mas reciente de gradle que tienes dentro de tu proyecto.
+
+---
+
