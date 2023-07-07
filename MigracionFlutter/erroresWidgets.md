@@ -64,3 +64,22 @@ Menciona que la **_asset_manifest.dart_** se esta mandando a llamar desde multip
 Para solucionar esto. lo unico que hay que hacer es actualizar la dependencia, en este caso **_google_fonts_**
 
 ---
+
+## El getter """" no esta definido para la clase """""
+
+El siguiente error
+
+    /C:/Users/Carlos%20Rodriguez/AppData/Local/Pub/Cache/hosted/pub.dev/awesome_select-5.2.0/lib/src/widget.dart:1122:66: Error: The getter 'cursorColor' isn't defined for the class 'ThemeData'.
+    - 'ThemeData' is from 'package:flutter/src/material/theme_data.dart' ('/C:/flutter/packages/flutter/lib/src/material/theme_data.dart').
+    Try correcting the name to the name of an existing getter, or defining a getter or field named 'cursorColor'.
+    cursorColor: modalConfig.isFullPage ? Colors.black : theme.cursorColor,
+
+dice que no esta definido el getter (en este caso) **_cursorColor_** para la clase (en este caso) **_ThemeData_**
+
+para esto solo debemos de ubicar de que widget se trata el error, el cual podemos ubicar por la direccion que nos da el erro
+
+> /C:/Users/Carlos%20Rodriguez/AppData/Local/Pub/Cache/hosted/pub.dev/**_awesome_select-5.2.0_**/lib/src/widget.
+
+entonces una vez ubicado, lo unico que hay que hacer es actualizarlo desde el **_pubspec.yaml_**
+
+---

@@ -102,3 +102,42 @@ este error es muy similar al anterior, su motivo es que ahora la version del gra
 
 ---
 
+## El proyecto necesita una nueva version de **_Kotlin Gradle._**
+
+Es posible que al ejecutar el proyecto muestre el siguiente error
+
+    ┌─ Flutter Fix
+    [!] Your project requires a newer version of the Kotlin Gradle plugin.
+    Find the latest version on https://kotlinlang.org/docs/releases.html#release-details, then update C:\Source\beqon_flutter\android\build.gradle:
+    ext.kotlin_version = '<latest-version>'
+    Exception: Gradle task assembleDebug failed with exit code 1
+
+Este error indica que la version del **_Kotlin Gradle_** es muy antigua para las necesidades del proyecto, para esto solo ocupamos cambiar la version en la siguiente directtion
+
+> **_android/build.gradle_**
+
+y actualizas la version del gradle en las lineas
+
+```gradle
+buildscript {
+    ext.kotlin_version = '1.6.10'
+    repositories {
+      ... ...
+    }
+    ... ...
+}
+```
+
+a la nueva version de la siguiente manera
+
+```gradle
+buildscript {
+    ext.kotlin_version = '1.9.0'
+    repositories {
+      ... ...
+    }
+    ... ...
+}
+```
+
+---
