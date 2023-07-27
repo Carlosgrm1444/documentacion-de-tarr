@@ -141,3 +141,59 @@ buildscript {
 ```
 
 ---
+
+## Cambio de version de app
+
+cada que necesitamos subir una nueva actualizacion de nuestra aplicacion en la tienda, tendremos que cambiar de version de app para que la tienda nos permita subirla, para ello nos dirigiremos al archivo
+
+> **_android/app/build.gradle_**
+
+y en la seccion de **_android/deafultConfig_** modificamos la version en el apartado de **_versionName_**, por ejemplo:
+
+```gradle
+android {
+  ... ...
+    defaultConfig {
+        applicationId "bqn.tarrsolutions.bqn"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 53
+        versionName "1.1.52"
+        multiDexEnabled true
+    }
+    ... ...
+}
+```
+
+lo cambiamos por:
+
+```gradle
+android {
+  ... ...
+    defaultConfig {
+        applicationId "bqn.tarrsolutions.bqn"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 53
+        versionName "1.1.53"
+        multiDexEnabled true
+    }
+    ... ...
+}
+```
+
+asi es como pasa de la version **_"1.1.52"_** a la **_"1.1.53"_**
+
+---
+
+## Error **_.tasks.FinalizeBundleTask$BundleToolRunnable_** al generar appBundle
+
+sl intentar generar el appbundle de tu aplicacion es posible que muestre el siguiente error
+
+```
+Execution failed for task ':app:signReleaseBundle'.
+ A failure occurred while executing com.android.build.gradle.internal.tasks.FinalizeBundleTask$BundleToolRunnable
+    java.lang.NullPointerException (no error message)
+```
+
+en esta caso, este se debio a que nuestro proyecto no contaba con firma/key en la aplicacion, y ahora esto es necesario para generar los appBundle y subirlo a la playstore, suele ocurrir cuando intentas actualizar una aplicacion muy antigua, pues antes no era necesario tener una key para generar el appbundle, ahora que es obligatorio sucede este error, en esta misma documentacion hay un apartado para recibir ayuda sobre la [Generacion de la key](/DocumentacionGeneral/GeneracionKey.md "Ir a Generacion de la key").
